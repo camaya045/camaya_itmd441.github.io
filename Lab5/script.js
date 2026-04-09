@@ -1,4 +1,4 @@
-const billInput = document.getElementById("bill");
+const bill = document.getElementById("bill");
 const taxInput = document.getElementById("tax");
 const tipInput = document.getElementById("tip");
 const currencySelect = document.getElementById("toCurrency");
