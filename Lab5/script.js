@@ -6,24 +6,28 @@ const tipResultInput = document.getElementById("tipResult");
 const totalBillInput = document.getElementById("TotalBill");
 const convertButton = document.getElementById("convertButton");
 
-
-
-function convertUSDToEuros(usd) {
-    const exchangeRate = 0.85; // 1 USD = 0.85 EUR
-    return (usd * exchangeRate).toFixed(2);
-}
-
-function convertUSDToRupees(usd) {
-    const exchangeRate = 92.43; // 1 USD = 92.43 INR (approximate)
-    return (usd * exchangeRate).toFixed(2);
-}
-
-// Example usage
-console.log(`$100 USD = €${convertUSDToEuros(100)}`);
-console.log(`$100 USD = ₹${convertUSDToRupees(100)}`);
-
 convertButton.addEventListener("click", function() {
     const billAmount = parseFloat(billInput.value);
-    const taxPercentage = parseFloat(taxInput.value);
+    //tax on bill (11%)
+    const taxAmount = billAmount * 0.11;
+    const totalWithTax = billAmount + taxAmount;
+    taxInput.value = totalWithTax.toFixed(2);
+    //tip slider
     const tipPercentage = parseFloat(tipInput.value);
-    const selectedCurrency = currencySelect.value;})
+    const tipAmount = billAmount * (tipPercentage / 100);
+    //curency seltciom
+    let convertedTip, convertedTotal;
+
+    if (currencySelect.value === "EUR") {
+        convertedTip = convertUSDToEuros(tipAmount);
+        convertedTotal = convertUSDToEuros(bill + tax + tipAmount);
+    } else if (currencySelect.value === "INR") {
+        convertedTip = convertUSDToRupees(tipAmount);
+        convertedTotal = convertUSDToRupees(bill + tax + tipAmount);
+    }else {
+        convertedTip = tipAmount.toFixed;
+        convertedTotal = (bill + tax + tipAmount).toFixed(2);
+    }
+    tipResultInput.value = convertedTip;
+    totalBillInput.value = convertedTotal;
+})
