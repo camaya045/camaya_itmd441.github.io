@@ -24,10 +24,9 @@ convertButton.addEventListener("click", function() {
         alert("Please enter a valid bill amount.");
         return;
     }
-
     //tax on bill (11%)
     const taxAmount = bill * 0.11;
-    const totalWithTax = bill + tax;
+    const totalWithTax = bill + taxAmount;
     taxInput.value = totalWithTax.toFixed(2);
     //tip slider
     const tipPercentage = parseFloat(tipInput.value);
@@ -37,13 +36,13 @@ convertButton.addEventListener("click", function() {
 
     if (currencySelect.value === "EUR") {
         convertedTip = convertUSDToEuros(tipAmount);
-        convertedTotal = convertUSDToEuros(bill + tax + tipAmount);
+        convertedTotal = convertUSDToEuros(bill + taxAmount + tipAmount);
     } else if (currencySelect.value === "INR") {
         convertedTip = convertUSDToRupees(tipAmount);
         convertedTotal = convertUSDToRupees(totalWithTax + tipAmount);
     }else {
         convertedTip = tipAmount.toFixed(2);
-        convertedTotal = totalWithTax.toFixed(2);
+        convertedTotal = (totalWithTax + tipAmount).toFixed(2);
     }
     tipResultInput.value = convertedTip;
     totalBillInput.value = convertedTotal;
