@@ -17,10 +17,6 @@ function convertUSDToRupees(usd) {
     return (usd * exchangeRate).toFixed(2);
 }
 
- tipInput.addEventListener("input", () => {
-        console.log("Tip %: " + tipInput.value);
-    });
-
 convertButton.addEventListener("click", function() {
     const bill = parseFloat(billInput.value);
 
