@@ -31,6 +31,9 @@ convertButton.addEventListener("click", function() {
     //tip slider
     const tipPercentage = parseFloat(tipInput.value);
     const tipAmount = bill * (tipPercentage / 100);
+    tipInput.addEventListener("input", () => {
+        console.log("Tip %: " + tipInput.value);
+    });
    
     let convertedTip, convertedTotal;
 
