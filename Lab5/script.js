@@ -17,6 +17,10 @@ function convertUSDToRupees(usd) {
     return (usd * exchangeRate).toFixed(2);
 }
 
+ tipInput.addEventListener("input", () => {
+        console.log("Tip %: " + tipInput.value);
+    });
+
 convertButton.addEventListener("click", function() {
     const bill = parseFloat(billInput.value);
 
@@ -31,9 +35,7 @@ convertButton.addEventListener("click", function() {
     //tip slider
     const tipPercentage = parseFloat(tipInput.value);
     const tipAmount = bill * (tipPercentage / 100);
-    tipInput.addEventListener("input", () => {
-        console.log("Tip %: " + tipInput.value);
-    });
+
    
     let convertedTip, convertedTotal;
 
