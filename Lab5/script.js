@@ -1,21 +1,23 @@
 const bill = document.getElementById("bill");
-const taxInput = document.getElementById("tax");
-const tipInput = document.getElementById("tip");
+const tax = document.getElementById("tax");
+const tip = document.getElementById("tip");
 const currencySelect = document.getElementById("toCurrency");
-const tipResultInput = document.getElementById("tipResult");
-const totalBillInput = document.getElementById("TotalBill");
+const tipResult = document.getElementById("tipResult");
+const totalBill = document.getElementById("TotalBill");
 const convertButton = document.getElementById("convertButton");
 
-convertButton.addEventListener("click", function() {
-    const billAmount = parseFloat(billInput.value);
-    //tax on bill (11%)
-    const taxAmount = billAmount * 0.11;
-    const totalWithTax = billAmount + taxAmount;
-    taxInput.value = totalWithTax.toFixed(2);
-    //tip slider
-    const tipPercentage = parseFloat(tipInput.value);
-    const tipAmount = billAmount * (tipPercentage / 100);
-    //curency seltciom
+cconvertButton.addEventListener("click", function () {
+    const bill = parseFloat(billInput.value);
+
+    // tax (11%)
+    const tax = bill * 0.11;
+    taxInput.value = (bill + tax).toFixed(2);
+
+    // tip (range slider is %)
+    const tipPercent = tipInput.value;
+    const tipAmount = bill * (tipPercent / 100);
+
+    // currency selection
     let convertedTip, convertedTotal;
 
     if (currencySelect.value === "EUR") {
@@ -24,10 +26,11 @@ convertButton.addEventListener("click", function() {
     } else if (currencySelect.value === "INR") {
         convertedTip = convertUSDToRupees(tipAmount);
         convertedTotal = convertUSDToRupees(bill + tax + tipAmount);
-    }else {
-        convertedTip = tipAmount.toFixed;
+    } else {
+        convertedTip = tipAmount.toFixed(2);
         convertedTotal = (bill + tax + tipAmount).toFixed(2);
     }
+
     tipResultInput.value = convertedTip;
     totalBillInput.value = convertedTotal;
-})
+});
