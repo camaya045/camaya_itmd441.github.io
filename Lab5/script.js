@@ -1,23 +1,38 @@
-const bill = document.getElementById("bill");
-const tax = document.getElementById("tax");
-const tip = document.getElementById("tip");
+const billInput = document.getElementById("bill");
+const taxInput = document.getElementById("tax");
+const tipInput = document.getElementById("tip");
 const currencySelect = document.getElementById("toCurrency");
-const tipResult = document.getElementById("tipResult");
-const totalBill = document.getElementById("TotalBill");
+const tipResultInput = document.getElementById("tipResult");
+const totalBillInput = document.getElementById("TotalBill");
 const convertButton = document.getElementById("convertButton");
 
-cconvertButton.addEventListener("click", function () {
+
+function convertUSDToEuros(usd) {
+    const exchangeRate = 0.85; // 1 USD = 0.85 EUR
+    return (usd * exchangeRate).toFixed(2);
+}
+
+function convertUSDToRupees(usd) {
+    const exchangeRate = 92.43; // 1 USD = 92.43 INR (approximate)
+    return (usd * exchangeRate).toFixed(2);
+}
+
+convertButton.addEventListener("click", function() {
     const bill = parseFloat(billInput.value);
 
-    // tax (11%)
-    const tax = bill * 0.11;
-    taxInput.value = (bill + tax).toFixed(2);
+    if (isNaN(bill) || bill <= 0) {
+        alert("Please enter a valid bill amount.");
+        return;
+    }
 
-    // tip (range slider is %)
-    const tipPercent = tipInput.value;
-    const tipAmount = bill * (tipPercent / 100);
-
-    // currency selection
+    //tax on bill (11%)
+    const taxAmount = bill * 0.11;
+    const totalWithTax = bill + tax;
+    taxInput.value = totalWithTax.toFixed(2);
+    //tip slider
+    const tipPercentage = parseFloat(tipInput.value);
+    const tipAmount = bill * (tipPercentage / 100);
+   
     let convertedTip, convertedTotal;
 
     if (currencySelect.value === "EUR") {
@@ -25,12 +40,11 @@ cconvertButton.addEventListener("click", function () {
         convertedTotal = convertUSDToEuros(bill + tax + tipAmount);
     } else if (currencySelect.value === "INR") {
         convertedTip = convertUSDToRupees(tipAmount);
-        convertedTotal = convertUSDToRupees(bill + tax + tipAmount);
-    } else {
+        convertedTotal = convertUSDToRupees(totalWithTax + tipAmount);
+    }else {
         convertedTip = tipAmount.toFixed(2);
-        convertedTotal = (bill + tax + tipAmount).toFixed(2);
+        convertedTotal = totalWithTax.toFixed(2);
     }
-
     tipResultInput.value = convertedTip;
     totalBillInput.value = convertedTotal;
-});
+})
