@@ -1,42 +1,96 @@
-/* Basic CSS reset */
+/* Reset some default browser styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-body {
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 20px;
 }
 
-h1 {
-    margin-bottom: 0.75rem;
-    color: #222;
+/* Page background */
+body {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    margin: 30px 0;
+    color: white;
     text-align: center;
 }
 
-p {
-    margin-bottom: 1rem;
-}
-
-a {
-    color: #007acc;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
+/* Main container */
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Section spacing */
+.container div {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Inputs and dropdown */
+input, select {
+    width: 100%;
+    padding: 8px;
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Readonly inputs */
+input[readonly] {
+    background-color: #f5f5f5;
+}
+
+/* Slider styling */
+input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4facfe;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button hover */
+button:hover {
+    background-color: #007bff;
+}
+
+/* Currency info box */
+.currency-info {
+    background-color: #f0f8ff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Result section */
+.result-section input {
+    font-weight: bold;
+    color: #333;
 }
