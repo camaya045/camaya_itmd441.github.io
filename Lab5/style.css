@@ -87,4 +87,5 @@ button:hover {
 .result-section input {
     font-weight: bold;
     color: #333;
+    margin: 10px 0;
 }
