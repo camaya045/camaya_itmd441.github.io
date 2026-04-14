@@ -29,6 +29,7 @@ convertButton.addEventListener("click", function() {
     const totalWithTax = bill + taxAmount;
     taxInput.value = totalWithTax.toFixed(2);
     //tip slider
+    const tipPercentage = parseFloat(tipInput.value);
     const tipAmount = bill * (tipPercentage / 100);
     tipInput.oninput = function() {
         output.textContent = this.value;
