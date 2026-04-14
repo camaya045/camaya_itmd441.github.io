@@ -1,4 +1,4 @@
-/* Reset some default browser styles */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +33,7 @@ header {
 
 /* Section spacing */
 .container div {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 /* Labels */
