@@ -5,7 +5,7 @@ const currencySelect = document.getElementById("toCurrency");
 const tipResultInput = document.getElementById("tipResult");
 const totalBillInput = document.getElementById("TotalBill");
 const convertButton = document.getElementById("convertButton");
-
+const output = document.getElementById("tipValue");
 
 function convertUSDToEuros(usd) {
     const exchangeRate = 0.85; // 1 USD = 0.85 EUR
@@ -29,9 +29,10 @@ convertButton.addEventListener("click", function() {
     const totalWithTax = bill + taxAmount;
     taxInput.value = totalWithTax.toFixed(2);
     //tip slider
-    const tipPercentage = parseFloat(tipInput.value);
     const tipAmount = bill * (tipPercentage / 100);
-
+    tipInput.oninput = function() {
+        output.textContent = this.value;
+    };
    
     let convertedTip, convertedTotal;
 
