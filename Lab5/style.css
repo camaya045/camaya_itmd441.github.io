@@ -53,8 +53,20 @@ input, select {
 
 /* Slider styling */
 input[type="range"] {
-    width: 100%;
-    cursor: pointer;
+    width: 50%;
+    margin: 10px 0;
+}
+
+.tip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#tipValue {
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
 }
 
 /* Button */
