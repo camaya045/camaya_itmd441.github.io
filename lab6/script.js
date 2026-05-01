@@ -1,40 +1,65 @@
-async function getReport() {
-    const select = document.getElementById('locationSelect').value;
+async function getData() {
+    const errorDiv = document.getElementById("error");
+    errorDiv.classList.add("hidden");
+    errorDiv.innerText = "";
+
+    const select = document.getElementById("locationSelect").value;
+
     if (!select) {
-        alert('Please select a location');
+        showError("Please select a location.");
         return;
+    }
+
+    const [lat, lng] = select.split(",");
+
+    try {
+        // TODAY
+        const todayRes = await fetch(`https://sunrisesunset.io/api/?lat=${lat}&lng=${lng}`);
+        const todayData = await todayRes.json();
+
+        if (todayData.status !== "OK") {
+            throw new Error("API error");
+        }
+
+        // TOMORROW
+        const tomorrowRes = await fetch(`https://sunrisesunset.io/api/?lat=${lat}&lng=${lng}&date=tomorrow`);
+        const tomorrowData = await tomorrowRes.json();
+
+        if (tomorrowData.status !== "OK") {
+            throw new Error("API error");
+        }
+
+        displayData(todayData.results, tomorrowData.results, todayData.timezone);
+
+    } catch (error) {
+        showError("Failed to fetch data. Please try again.");
     }
 }
 
-
-const url = 'https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}';  
-
-// Fetch data from the API
-fetch(url) 
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);  
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
-
-    function displayData(data) {
-    const today = data.results;
-    const tomorrow = data.results; 
-
+function displayData(today, tomorrow, timezone) {
     document.getElementById("today").innerHTML = `
-        Sunrise: ${today.sunrise}<br>
-        Sunset: ${today.sunset}<br>
-        Dawn: ${today.dawn}<br>
-        Dusk: ${today.dusk}<br>
-        Solar Noon: ${today.solar_noon}<br>
-        Day Length: ${today.day_length}<br>
-        Timezone: ${data.timezone}
+        <p>Sunrise: ${today.sunrise}</p>
+        <p>Sunset: ${today.sunset}</p>
+        <p>Dawn: ${today.dawn}</p>
+        <p>Dusk: ${today.dusk}</p>
+        <p>Solar Noon: ${today.solar_noon}</p>
+        <p>Day Length: ${today.day_length}</p>
+        <p>Timezone: ${timezone}</p>
     `;
+
+    document.getElementById("tomorrow").innerHTML = `
+        <p>Sunrise: ${tomorrow.sunrise}</p>
+        <p>Sunset: ${tomorrow.sunset}</p>
+        <p>Dawn: ${tomorrow.dawn}</p>
+        <p>Dusk: ${tomorrow.dusk}</p>
+        <p>Solar Noon: ${tomorrow.solar_noon}</p>
+        <p>Day Length: ${tomorrow.day_length}</p>
+        <p>Timezone: ${timezone}</p>
+    `;
+}
+
+function showError(message) {
+    const errorDiv = document.getElementById("error");
+    errorDiv.innerText = message;
+    errorDiv.classList.remove("hidden");
 }
