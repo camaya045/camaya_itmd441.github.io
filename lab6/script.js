@@ -1,4 +1,4 @@
-async function getData() {
+async function getReport() {
     const errorDiv = document.getElementById("error");
     errorDiv.classList.add("hidden");
     errorDiv.innerText = "";
