@@ -1,3 +1,8 @@
+async function getReport() {
+    const select = document.getElementById('locationSelect').value;
+}
+
+
 const url = 'https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873';  
 
 // Fetch data from a JSON URL
