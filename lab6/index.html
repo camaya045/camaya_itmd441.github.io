@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunrise & Sunset Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 <body>
 
     <h1>Sunrise & Sunset Dashboard</h1>
-    
+
     <div class ="options">
         <select id="locationSelect">
             <option value="">Select location</option>
@@ -26,13 +26,40 @@
             <option value="51.5074, -0.1278">London, UK</option>
         </select>
 
-    </div>
-     <div id="Dashboard">
-                <h2>Today's Report</h2>
-                <p id="today-report"></p>
+        <button onclick="getSunriseSunset()">Get Report</button>
 
-                <h2>Tomorrow's Report</h2>
-                <p id="tomorrow-report"></p>
+    </div>
+
+    <div id="dashboard">
+        <div class="card">
+            <h2>Today</h2>
+            <div id="today-report">
+                <p>Sunrise: </p>
+                <p>Sunset: </p>
+                <p>Dawn: </p>
+                <p>Dusk: </p>
+                <p>Solar Noon: </p>
+                <p>Day Length: </p>
+                <p>Timezone: </p>
             </div>
+        </div>
+
+        <div class="card">
+            <h2>Tomorrow</h2>
+            <div id="tomorrow-report">
+                <p>Sunrise: </p>
+                <p>Sunset: </p>
+                <p>Dawn: </p>
+                <p>Dusk: </p>
+                <p>Solar Noon: </p>
+                <p>Day Length: </p>
+                <p>Timezone: </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Data provided by <a href="https://sunrisesunset.io/api/" target="_blank">SunriseSunset.io API</a></p>
+    </footer>
 </body>
 </html>
