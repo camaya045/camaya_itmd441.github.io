@@ -1,11 +1,15 @@
 async function getReport() {
     const select = document.getElementById('locationSelect').value;
+    if (!select) {
+        alert('Please select a location');
+        return;
+    }
 }
 
 
-const url = 'https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873';  
+const url = 'https://api.sunrisesunset.io/json?lat=${latitude}&lng=${longitude}';  
 
-// Fetch data from a JSON URL
+// Fetch data from the API
 fetch(url) 
     .then(response => {
         if (!response.ok) {
@@ -14,8 +18,23 @@ fetch(url)
         return response.json();
     })
     .then(data => {
-        console.log(data);  // Process the fetched data here
+        console.log(data);  
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
+
+    function displayData(data) {
+    const today = data.results;
+    const tomorrow = data.results; 
+
+    document.getElementById("today").innerHTML = `
+        Sunrise: ${today.sunrise}<br>
+        Sunset: ${today.sunset}<br>
+        Dawn: ${today.dawn}<br>
+        Dusk: ${today.dusk}<br>
+        Solar Noon: ${today.solar_noon}<br>
+        Day Length: ${today.day_length}<br>
+        Timezone: ${data.timezone}
+    `;
+}
